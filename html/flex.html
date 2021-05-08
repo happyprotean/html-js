@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .father{
+      display: flex;
+      width: 100%;
+      height: 800px;
+      border: 2px solid black;
+
+      flex-direction: row;  /* 盒子排放方向 */
+      flex-wrap: nowrap;      /* 换行，盒子此时不再缩放 */
+      flex-flow: row nowrap;  /* 合写形式 */
+
+      justify-content: flex-start;  /* 主轴上的对齐方式 */
+      align-items: flex-start;      /* 副轴上的对齐方式，当自动换行时会占满父元素的空间 */
+      align-content: flex-start;    /* 多根轴线时生效 */
+    }
+
+    .son{
+      width: 200px;
+      height: 100px;
+
+      order: 0;           /* 数字越小，越靠前 */
+      flex-grow: 0;       /* 放大比例，默认为0 */
+      flex-shrink: 1;     /* 缩小比例，默认为1 */
+      flex-basis: auto;   /* 项目的主轴大小 */
+      flex: 0 1 auto;     /* 简写形式 */
+      align-self: flex-start;  /* 自定义子元素的align-items属性 */
+
+      text-align: center;
+      line-height: 100px;
+    }
+
+
+    .bfa{
+      background-color: #bfa;
+    }
+    .red{
+      background-color: red;
+    }
+    .green{
+      background-color: green;
+    }
+    .yellow{
+      background-color: yellow;
+    }
+    .orange{
+      background-color: orange;
+    }
+    .blue{
+      background-color: blue;
+    }
+  </style>
+</head>
+<body>
+  <!-- http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html -->
+  <!-- https://zhuanlan.zhihu.com/p/25303493 -->
+  <div class="father">
+    <div class="son bfa">div 1</div>
+    <div class="son red">div 2</div>
+    <div class="son green">div 3</div>
+    <div class="son yellow">div 4</div>
+    <div class="son orange">div 5</div>
+    <div class="son blue">div 6</div>
+  </div>
+</body>
+</html>

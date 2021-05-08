@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<br>
+
+  <div>
+    没有防抖的输入
+    <input id="noDebounce" type="text">
+  </div>
+
+  <div>
+    防抖的输入
+    <input id="debounce" type="text">
+  </div>
+
+  <div>
+    节流的输入
+    <input id="throttle" type="text">
+  </div>
+
+  <script>
+    function axios(content){
+      console.log('axios request: ' + content)
+    }
+    // 没有节流
+    let inputa = document.getElementById('noDebounce')
+    inputa.addEventListener('keydown', ev => {
+      axios(ev.target.value)
+    })
+
+    // 在事件被触发的n秒后再执行回调，如果n秒内再触发，则重新计时
+    function debounce(fun, delay){
+      let timer = null
+      return function(args){
+        clearTimeout(timer)
+        timer = setTimeout(() => fun(args), delay)
+      }
+    }
+    // 节流
+    let inputb = document.getElementById('debounce')
+    let debounceAxios = debounce(axios, 1000)
+    inputb.addEventListener('keydown', ev => {
+      debounceAxios(ev.target.value)
+    })
+
+    // 规定在一个单位时间内，只能触发一次函数。如果这个单位时间内触发多次函数，只有一次生效
+    function throttle(fun, delay){
+      let last, timer
+      return function(args){
+        let now = +new Date()
+        if (last && now < last + delay){
+          clearTimeout(timer)
+          timer = setTimeout(() => {
+            last = now
+            fun(args)
+          }, delay)
+        } else {
+          last = now
+          fun(args)
+        }
+      }
+    }
+    let inputc = document.getElementById('throttle')
+    let throttleAxios = throttle(axios, 1000)
+    inputc.addEventListener('keydown', ev => {
+      throttleAxios(ev.target.value)
+    })
+
+
+    function biubiubiu(){
+      console.log('biubiubiu', new Date().toTimeString())
+    }
+    // setInterval(throttle(biubiubiu, 1000), 10);
+  </script>
+  
+</body>
+</html>

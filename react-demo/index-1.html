@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+<body>
+
+  <div id="root"></div>
+
+  <script type="text/babel">
+
+    class Keli extends React.Component{
+      state = {username: '', password: ''}
+
+      // 函数柯理化（高级函数的闭包）
+      // onChange需要一个回调函数，而不是函数的返回值
+      // 在调用onChange回调时，会自动传入event事件
+      saveFormData = (dataType) => {
+        return (event) => {
+          this.setState({[dataType]: event.target.value})
+        }
+      }
+
+      saveFormData2 = (dataType, event) => {
+        this.setState({[dataType]: event.target.value})
+      }
+      
+      render(){
+        return (
+          <form onSubmit={this.handleSubmit}>
+            username: <input onChange={this.saveFormData('username')} /><br></br>
+            password: <input onChange={(event) => {this.saveFormData2('password', event)}} /><br></br>
+            <button>login</button>
+          </form>
+        )
+      }
+
+    }
+
+    class Life extends React.Component{
+      
+      componentDidMount(){
+        console.log('did mount')
+      }
+
+      componentWillUnmount(){
+        console.log('will mount')
+      }
+
+      render(){
+        console.log('render')
+        return (
+          <div>div</div>
+        )
+      }
+    }
+
+    ReactDOM.render(
+      (
+        <div>
+          <Life />
+        </div>
+      ),
+      document.getElementById('root')
+    )
+  </script>
+  
+</body>
+</html>

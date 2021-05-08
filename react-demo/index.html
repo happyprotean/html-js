@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function Welcome(props){
+        return <h1>hi, {props.name}</h1>
+      }
+      class Welcome2 extends React.Component{
+        render(){
+          return <h1>hi, {this.props.name}</h1>
+        }
+      }
+      function App(){
+        return (
+          <div>
+            <Welcome name='vue'/>
+            <Welcome name='react'/>
+            <Welcome name='angular'/>
+          </div>
+        )
+      }
+
+      function Avatar(props){
+        return (
+          <img src={props.user.avatarUrl} alt={props.user.name} />
+        )
+      }
+      function UserInfo(props){
+        return (
+          <div>
+            <Avatar user={props.user}/>
+            <div>
+              {props.user.name}
+            </div>
+          </div>
+        )
+      }
+      function Comment(props){
+        return (
+          <div>
+            <UserInfo user={props.author}/>
+            <div>
+              {props.text}
+            </div>
+          </div>
+        )
+      }
+      const comment = {
+        author: {avatarUrl: './test.jpg', name: 'avatar'},
+        text: 'comment component'
+      }
+
+      // 定时器示例
+      class Clock extends React.Component{
+        constructor(props){
+          super(props)
+          this.state = {date: new Date()}
+        }
+
+        componentDidMount(){
+          this.timeID = setInterval(() => this.tick(), this.props.time)
+        }
+
+        componentWillUnmount(){
+          clearInterval(this.timeID)
+        }
+
+        tick(){
+          this.setState({
+            date: new Date()
+          })
+        }
+
+        render(){
+          return (
+            <div>
+              <h1>Hello, world!</h1>
+              <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+            </div>
+          )
+        }
+      }
+
+      function ActiveLink(){
+        function handleClick(e){
+          e.preventDefault()
+          console.log('clicked')
+        }
+
+        return (
+          <a href="#" onClick={handleClick}>Click me</a>
+        )
+      }
+      
+      class Toggle extends React.Component{
+        constructor(props){
+          super(props)
+          this.state = {isToggle: true}
+          // this.handleClick = this.handleClick.bind(this)
+          // If use arrow funcion in handleClick, you need not to bind
+        }
+
+        handleClick = (value, ev) => {
+          this.setState(state => ({
+            isToggle: !state.isToggle
+          }))
+          console.log(value)
+          console.log(ev)
+        }
+
+        render(){
+          return (
+            <button onClick={this.handleClick.bind(this, this.state.isToggle)}>
+              {this.state.isToggle ? 'ON' : 'OFF'}
+            </button>
+          )
+        }
+      }
+
+      function UserGreeting(props){
+        return <h1>Welcome back!</h1>
+      }
+      function GuestGreeting(props){
+        return <h1>Please login!</h1>;
+      }
+      function Greeting(props){
+        const isLoggedIn = props.isLoggedIn
+        if (isLoggedIn){
+          return <UserGreeting/>
+        } else {
+          return <GuestGreeting/>
+        }
+      }
+      function LoggInBtn(props){
+        return (
+          <button onClick={props.onClick}>
+            Login
+          </button>
+        )
+      }
+      function LoggOutBtn(props){
+        return (
+          <button onClick={props.onClick}>
+            Logout
+          </button>
+        )
+      }
+      class LoginControl extends React.Component{
+        constructor(props){
+          super(props)
+          this.state = {isLoggedIn: false}
+        }
+        handleLogOut = () => {
+          this.setState(state => ({isLoggedIn: false}))
+        }
+        handleLogIn = () => {
+          this.setState(state => ({isLoggedIn: true}))
+        }
+ 
+        render(){
+          const isLoggedIn = this.state.isLoggedIn
+          let btn
+          if (isLoggedIn){
+            btn = <LoggOutBtn onClick={this.handleLogOut}/>
+          } else {
+            btn = <LoggOutBtn onClick={this.handleLogIn}/>
+          }
+          return (
+            <div>
+              <Greeting isLoggedIn={this.state.isLoggedIn}/>
+              {btn}
+            </div>
+          )
+        }
+      }
+
+      function MailBox(props){
+        const unreadMessages = props.unreadMessages
+        return (
+          <div>
+            <h1>Hello</h1>
+            {unreadMessages.length > 0 && 
+              <h2>
+                You have {unreadMessages.length} unread messages.
+              </h2>
+            }
+          </div>
+        )
+      }
+      const unreadMessages = ['react', 'vue', 'js']
+
+      function Warning(props){
+        if (!props.warn){
+          return null
+        }
+        return (
+          <div className='Warning'>
+            Warning
+          </div>
+        )
+      }
+      class Page extends React.Component{
+        constructor(props){
+          super(props)
+          this.state = {showWarning: true}
+        }
+
+        handleClick = () => {
+          this.setState((state) => ({
+            showWarning: !state.showWarning
+          }))
+        }
+
+        render(){
+          return (
+            <div>
+              <Warning warn={this.state.showWarning}/>
+              <button onClick={this.handleClick}>
+                {this.state.showWarning ? "close" : "open"}
+              </button>
+            </div>
+          )
+        }
+      }
+
+      const numbers = [1, 2, 3, 4, 5]
+      const listItem = numbers.map(number => {return <li>{number}</li>})
+
+      function NumberList(props){
+        const numbers = props.numbers
+        const listItem = numbers.map(number => <li key={number.toString()}>{number}</li>)
+        return (
+          <ul>{listItem}</ul>
+        )
+      }
+      function ListItem(props){
+        return <li></li>
+      }
+
+      class NameForm extends React.Component{
+        constructor(props){
+          super(props)
+          this.state = {value: ''}
+        }
+
+        handleChange = (event) => {
+          this.setState((state) => ({
+            value: event.target.value
+          }))
+          console.log(event)
+        }
+
+        handleSubmit = (event) => {
+          alert(this.state.value)
+          event.preventDefault()
+          console.log(event)
+        }
+
+        render(){
+          return (
+            <form onSubmit={this.handleSubmit}>
+              <label>
+                名字：
+                <input type="text" value={this.state.value} onChange={this.handleChange}/>
+              </label>
+              <input type="submit" value="提交" />
+
+            </form>
+          )
+        }
+      }
+
+      class FlavorForm extends React.Component{
+        constructor(props){
+          super(props)
+          this.state = {value: 'lime'}
+        }
+
+        handleChange = (event) => {
+          this.setState({value: event.target.value})
+        }
+
+        handleSubmit = (event) => {
+          alert(this.state.value)
+          event.preventDefault()
+        }
+
+        render(){
+          return (
+            <form onSubmit={this.handleSubmit}>
+              <label>
+                最喜欢的水果是：
+                <select value={this.state.value} onChange={this.handleChange}>
+                  <option value="grape">grape</option>
+                  <option value="lime">lime</option>
+                  <option value="coconut">cocnut</option>
+                  <option value="mango">mango</option>
+                </select>
+              </label>
+              <input type="submit" value="提交"/>
+            </form>
+          )
+        }
+      }
+
+      class Reservation extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            isGoing: true,
+            numberOfGuests: 2
+          };
+
+          this.handleInputChange = this.handleInputChange.bind(this);
+        }
+
+        handleInputChange(event) {
+          const target = event.target;
+          const value = target.type === 'checkbox' ? target.checked : target.value;
+          const name = target.name;
+
+          this.setState({
+            [name]: value
+          })
+          setTimeout(() => {
+            console.log(this.state)
+          }, 1000);
+        }
+
+        render() {
+          return (
+            <form>
+              <label>
+                参与:
+                <input
+                  name="isGoing"
+                  type="checkbox"
+                  checked={this.state.isGoing}
+                  onChange={this.handleInputChange} />
+              </label>
+              <br />
+              <label>
+                来宾人数:
+                <input
+                  name="numberOfGuests"
+                  type="number"
+                  value={this.state.numberOfGuests}
+                  onChange={this.handleInputChange} />
+              </label>
+            </form>
+          );
+        }
+      }
+
+      function BoilingVerdict(props){
+        if (props.celsius >= 100){
+          return <p>The water would boil</p>
+        } else {
+          return <p>The water would not boil</p>
+        }
+      }
+      const scaleNames = {c: 'Celsius', f: 'Fahrenheit'}
+      function toCelsius(fahrenheit) {
+        return (fahrenheit - 32) * 5 / 9;
+      }
+      function toFahrenheit(celsius) {
+        return (celsius * 9 / 5) + 32;
+      }
+      function tryConvert(temperature, convert){
+        const input = parseFloat(temperature)
+        if (Number.isNaN(input)){
+          return ''
+        }
+        const output = convert(input)
+        const rounded = Math.round(output * 1000) / 1000
+        return rounded.toString()
+      }
+      class TemperatureInput extends React.Component{
+        constructor(props){
+          super(props)
+        }
+
+        handleChange = (event) => {
+          this.props.onTemperatureChange(event.target.value)
+        }
+
+        render(){
+          const temperature = this.props.temperature
+          const scale = this.props.scale
+          return (
+            <fieldset>
+              <legend>Enter temperature in {scaleNames[scale]}: </legend>
+              <input value={temperature} onChange={this.handleChange} />
+            </fieldset>
+          )
+        }
+      }
+      class Calculator extends React.Component{
+        constructor(props){
+          super(props)
+          this.state = {temperature: '', scale: 'c'}
+        }
+
+        handleCelsiusChange = (temperature) => {
+          this.setState({scale: 'c', temperature});
+        }
+
+        handleFahrenheitChange = (temperature) => {
+          this.setState({scale: 'f', temperature});
+        }
+
+        render(){
+          const scale = this.state.scale
+          const temperature = this.state.temperature
+          const celsius = scale === 'f' ? tryConvert(temperature, toCelsius) : temperature
+          const fahrenheit = scale === 'c' ? tryConvert(temperature, toFahrenheit) : temperature
+
+          return (
+            <fieldset>
+              <TemperatureInput scale="c" temperature={celsius} onTemperatureChange={this.handleCelsiusChange} />
+              <TemperatureInput scale="f" temperature={fahrenheit} onTemperatureChange={this.handleFahrenheitChange} />
+              <BoilingVerdict celsius={parseFloat(celsius)}/>
+            </fieldset>
+          )
+        }
+      }
+
+      function FancyBorder(props){
+        return (
+          <div>
+            {props.children}
+          </div>
+        )
+      }
+      function WelcomeDialog(props){
+        return (
+          <FancyBorder>
+            <h1>Welcome</h1>
+            <p>Thans for visiting</p>
+          </FancyBorder>
+        )
+      }
+
+      ReactDOM.render(
+        (
+          <FlavorForm />
+        ),
+         document.getElementById('root')
+      )
+
+    </script>
+  </body>
+</html>
