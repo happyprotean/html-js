@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <!-- 博客地址：https://juejin.cn/post/6844903669389885453 -->
 </head>
 <br>
 
@@ -29,7 +30,7 @@
     }
     // 没有节流
     let inputa = document.getElementById('noDebounce')
-    inputa.addEventListener('keydown', ev => {
+    inputa.addEventListener('keyup', ev => {
       axios(ev.target.value)
     })
 
@@ -44,7 +45,7 @@
     // 节流
     let inputb = document.getElementById('debounce')
     let debounceAxios = debounce(axios, 1000)
-    inputb.addEventListener('keydown', ev => {
+    inputb.addEventListener('keyup', ev => {
       debounceAxios(ev.target.value)
     })
 
@@ -67,7 +68,7 @@
     }
     let inputc = document.getElementById('throttle')
     let throttleAxios = throttle(axios, 1000)
-    inputc.addEventListener('keydown', ev => {
+    inputc.addEventListener('keyup', ev => {
       throttleAxios(ev.target.value)
     })
 
