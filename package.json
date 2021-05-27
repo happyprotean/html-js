@@ -13,8 +13,10 @@
     "@babel/core": "^7.14.0",
     "@babel/plugin-proposal-decorators": "^7.13.15",
     "babel-preset-react-app": "^10.0.0",
+    "dayjs": "^1.10.4",
     "express": "^4.17.1",
     "immutable": "*",
+    "jsonp": "^0.2.1",
     "moment": "^2.29.1",
     "react-redux": "^7.2.4",
     "redux": "^4.1.0"
