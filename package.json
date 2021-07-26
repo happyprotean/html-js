@@ -15,13 +15,18 @@
     "babel-preset-react-app": "^10.0.0",
     "dayjs": "^1.10.4",
     "express": "^4.17.1",
+    "fast-glob": "^3.2.7",
+    "glob": "^7.1.7",
     "immutable": "*",
     "jsonp": "^0.2.1",
     "moment": "^2.29.1",
     "react-redux": "^7.2.4",
-    "redux": "^4.1.0"
+    "redux": "^4.1.0",
+    "vue-auto-routing": "^1.0.1",
+    "vue-route-generator": "^1.0.0",
+    "vue-template-compiler": "^2.6.14",
+    "ws": "^7.5.1"
   },
-  "type": "module",
   "babel": {
     "plugins": [
       [
