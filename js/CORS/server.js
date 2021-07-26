@@ -11,12 +11,12 @@ app.all('*', function(req, res, next) {
   next();
 });
 
-app.get('/server_1', (req, res) => {
-  res.send('server 1')
+app.get('/server', (req, res) => {
+  res.send('get server')
 })
 
-app.put('/server_1', (req, res) => {
-  res.send('server 1')
+app.put('/server', (req, res) => {
+  res.send('put server')
 })
 
 app.listen(port, () => {

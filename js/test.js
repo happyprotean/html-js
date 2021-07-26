@@ -1,4 +1,11 @@
-let a = 1
-let b = 2
+const { generateRoutes } = require('vue-route-generator')
 
-a === -1 ? console.log(b) : ''
+const code = generateRoutes({
+  pages: '/Users/huanxi/learn/projects/html-js/js/pages',
+  nested: true
+})
+
+console.log(code)
+
+// import routes from 'vue-auto-routing'
+// console.log(routes)

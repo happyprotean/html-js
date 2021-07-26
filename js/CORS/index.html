@@ -6,23 +6,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <script>
-    function handleClick(){
+    function handleGetClick(){
       xmlhttp = new XMLHttpRequest()
       xmlhttp.onreadystatechange=function(){
         if (xmlhttp.readyState==4 && xmlhttp.status==200)
         {
-          document.getElementById('text').innerHTML = 'clicked'
+          document.getElementById('getText').innerHTML = 'get clicked'
         }
       }
-      const url = 'http://localhost:3005/server_1'
+      const url = 'http://localhost:3005/server'
+      xmlhttp.open("GET", url, true);
+      xmlhttp.send();
+      }
+
+      function handlePutClick(){
+      xmlhttp = new XMLHttpRequest()
+      xmlhttp.onreadystatechange=function(){
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+          document.getElementById('putText').innerHTML = 'put clicked'
+        }
+      }
+      const url = 'http://localhost:3005/server'
       xmlhttp.open("PUT", url, true);
-      // xmlhttp.setRequestHeader('X-Custom-Header', 'value')
       xmlhttp.send();
       }
   </script>
 </head>
 <body>
-  <button id="btn" onclick="handleClick()">click</button>
-  <p id="text"></p>
+  <button id="get" onclick="handleGetClick()">get</button>
+  <p id="getText"></p>
+  <button id="put" onclick="handlePutClick()">put</button>
+  <p id="putText"></p> 
 </body>
 </html>
