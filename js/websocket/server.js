@@ -1,6 +1,4 @@
-import express from 'express'
 import WebSocket from 'ws'
-let app = express();
 let wss = new WebSocket.Server({port:3000});
 
 wss.on('connection',function(ws) {
@@ -20,5 +18,3 @@ wss.on('connection',function(ws) {
     }
   });
 })
-
-app.listen(3001)

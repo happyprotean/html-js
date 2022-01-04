@@ -9,16 +9,22 @@
   let socket = new WebSocket('ws://localhost:3000');
   socket.onopen = function () {
     socket.send('我和游戏谁重要')
-    socket.send('我和你前女友掉到河里，你先救谁')
-    socket.send('肚子有点疼')
+    setTimeout(() => {socket.send('我和你前女友掉到河里，你先救谁')}, 1000)
+    setTimeout(() => {socket.send('我肚子疼')}, 2000)
+
+    let input = document.getElementById('input')
+    let button = document.getElementById('button')
+    button.onclick = () => {
+      socket.send(input.value)
+    }
   }
-  
-  socket.onmessage = function(e) {
-    console.log(e.data)
+  socket.onmessage = function(event) {
+    console.log(event.data)
   }
 </script>
 </head>
 <body>
-  
+  <input id="input" type="text">
+  <input id="button" type="submit">
 </body>
 </html>
