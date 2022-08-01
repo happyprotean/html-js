@@ -23,5 +23,16 @@ function getAndroidVersion() {
   return match ? match[1] : ''
 }
 
-let v = getAndroidVersion()
-console.log(v[0] === '9')
+// let v = getAndroidVersion()
+// console.log(v[0] === '9')
+
+function maskIdNum(idNum) {
+  if (!idNum) return '';
+  return idNum.replace(/^(.{4})(\d+)(.{4})$/, function(match, p1, p2, p3) {
+    console.log('111', p1, p2, p3)
+    return p1 + '*'.repeat(p2.length) + p3
+  });
+}
+
+let str = '342201199010101234'
+console.log('res', maskIdNum(str))
