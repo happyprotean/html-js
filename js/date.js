@@ -1,7 +1,7 @@
-let a = new Date("2021-05-02 00:00:00")
+let a = new Date("2021-05-02 01:01:00")
 
 let b = new Date("2021-05-02 23:59:59")
-console.log(a.getTime(), b.getTime())
+console.log(a.getTime(), b.getTime(), a.getHours(), a.getMinutes())
 
 let c = new Date('')
 console.log(c, isNaN(c.getTime()))
