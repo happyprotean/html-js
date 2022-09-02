@@ -18,7 +18,7 @@
     "@babel/traverse": "^7.14.9",
     "@babel/types": "^7.14.9",
     "babel-preset-react-app": "^10.0.0",
-    "dayjs": "^1.10.4",
+    "dayjs": "^1.11.4",
     "dynamic-form": "file:../../../work/dynamic-form",
     "express": "^4.17.1",
     "fast-glob": "^3.2.7",
