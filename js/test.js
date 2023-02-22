@@ -1,6 +1,3 @@
-try {
-  let a
-  a.map(item => item.name)
-} catch(e) {
-  console.log('error', e)
-}
+let str = '1,334,44'
+
+console.log(str.split(',').join(''))
